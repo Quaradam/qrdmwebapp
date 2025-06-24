@@ -29,3 +29,26 @@ window.onclick = function(event) {
     closeModal();
   }
 };
+let isPlaying = false;
+
+window.addEventListener('DOMContentLoaded', () => {
+  const music = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('music-toggle');
+  const musicIcon = musicBtn.querySelector('i');
+  const musicInfo = document.getElementById('music-now-playing');
+
+  window.toggleMusic = function () {
+    if (isPlaying) {
+      music.pause();
+      musicIcon.className = 'fas fa-play';
+      musicInfo.classList.remove('show');
+      musicBtn.classList.remove('playing');
+    } else {
+      music.play();
+      musicIcon.className = 'fas fa-pause';
+      musicInfo.classList.add('show');
+      musicBtn.classList.add('playing');
+    }
+    isPlaying = !isPlaying;
+  };
+});
