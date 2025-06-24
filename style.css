@@ -1,0 +1,155 @@
+:root {
+  --primary: #6750A4;
+  --on-primary: #FFFFFF;
+  --background: #121212;
+  --surface: #1C1B1F;
+  --text: #E6E1E5;
+  --link: #B69DF8;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: var(--background);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 4em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 50px;
+  color: var(--primary);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.about-button {
+  margin-top: 20px;
+}
+
+.about-button button {
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.about-button button:hover {
+  background: #7f67be;
+}
+
+.footer {
+  background: var(--surface);
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.footer a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: var(--link);
+  font-size: 0.95em;
+}
+
+.footer i {
+  margin-right: 6px;
+}
+
+.footer a[href*="youtube"] i {
+  color: #FF0000;
+}
+
+/* Модальное окно */
+.modal {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: var(--surface);
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+  transform: scale(1);
+}
+
+.close-btn {
+  margin-top: 20px;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #7f67be;
+}
+
+/* Загрузчик */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity 0.5s ease;
+}
+
+.loader {
+  border: 6px solid var(--surface);
+  border-top: 6px solid var(--primary);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
