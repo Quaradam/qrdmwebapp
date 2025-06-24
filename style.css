@@ -153,3 +153,32 @@ body {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+@media (max-width: 600px) {
+  .main {
+    font-size: 2.5em;
+    margin-top: 30px;
+  }
+
+  .footer {
+    padding: 16px 8px;
+  }
+
+  .footer a {
+    display: block;
+    margin: 8px 0;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .about-button {
+    margin-top: 10px;
+  }
+
+  .about-button button {
+    font-size: 0.75em;
+    padding: 3px 8px;
+  }
+}
