@@ -52,3 +52,10 @@ window.addEventListener('DOMContentLoaded', () => {
     isPlaying = !isPlaying;
   };
 });
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(() => {
+    console.log('Service Worker зарегистрирован');
+  }).catch((error) => {
+    console.log('Ошибка регистрации Service Worker:', error);
+  });
+}
