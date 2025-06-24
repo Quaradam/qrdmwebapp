@@ -182,3 +182,12 @@ body {
     padding: 3px 8px;
   }
 }
+.footer a[href*="t.me"] i {
+  color: #0088cc;
+}
+.footer a[href*="x.com"] i {
+  color: #000000;
+}
+.footer a[href*="tiktok.com"] i {
+  color: #010101;
+}
