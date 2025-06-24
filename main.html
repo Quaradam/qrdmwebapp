@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>QRDM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .footer a[href*="youtube"] i {
+  color: #FF0000;
+}
+    .footer i {
+  margin-right: 6px;
+}
+    .modal {
+  /* display по умолчанию убираем — будет управляться через JS */
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: var(--surface);
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+  transform: scale(1);
+}
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --background: #121212;
+      --surface: #1C1B1F;
+      --text: #E6E1E5;
+      --link: #B69DF8;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+  .main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 4em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--primary);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  margin-top: 50px;
+}
+
+    .about-button {
+      margin-top: 20px;
+    }
+
+    .about-button button {
+    background: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    border-radius: 16px;
+    padding: 4px 10px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    }
+
+    .about-button button:hover {
+      background: #7f67be;
+    }
+
+    .footer {
+      background: var(--surface);
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .footer a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: var(--link);
+      font-size: 0.95em;
+    }
+
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: var(--surface);
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      background: var(--primary);
+      color: var(--on-primary);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background: #7f67be;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main">
+    QRDM
+    <div class="about-button">
+      <button onclick="openModal()">Обо мне</button>
+    </div>
+  </div>
+
+<div class="footer">
+    <a href="https://youtube.com/@quaradam" target="_blank">
+        <i class="fab fa-youtube"></i> YouTube
+    </a>
+  <a href="https://example1.com" target="_blank">
+    <i class="fas fa-globe"></i> Сайт 1
+  </a>
+  <a href="https://example2.com" target="_blank">
+    <i class="fab fa-github"></i> GitHub
+  </a>
+  <a href="https://example3.com" target="_blank">
+    <i class="fab fa-twitter"></i> Twitter
+  </a>
+</div>
+
+  <!-- Модальное окно -->
+  <div class="modal" id="aboutModal">
+    <div class="modal-content">
+      <h2>Обо мне</h2>
+      <p>Привет! Меня зовут Андрей, я создаю минималистичные сайты и обожаю экспериментировать с дизайном и кодом.</p>
+      <button class="close-btn" onclick="closeModal()">Закрыть</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById('aboutModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('aboutModal').style.display = 'none';
+    }
+
+    // Закрытие по клику вне окна
+    window.onclick = function(event) {
+      const modal = document.getElementById('aboutModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+  </script>
+  <script>
+  const modal = document.getElementById('aboutModal');
+
+  function openModal() {
+    modal.style.display = 'flex';
+    requestAnimationFrame(() => {
+      modal.classList.add('show');
+    });
+  }
+
+  function closeModal() {
+    modal.classList.remove('show');
+    modal.addEventListener('transitionend', hideModal, { once: true });
+  }
+
+  function hideModal() {
+    modal.style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  };
+</script>
+
+</body>
+</html>
