@@ -67,7 +67,7 @@ if ('serviceWorker' in navigator) {
 
 (function initYouTubeFeed() {
   // Настройки — замените на свои
-  const API_KEY = 'AIzaSyCt9X2BcUtOM60nusX6KRR1OyXXkNjMZkw'; // <-- вставьте ваш ключ YouTube Data API v3
+  const API_KEY = ''; // <-- вставьте ваш ключ YouTube Data API v3
   const CHANNEL_ID = 'UCehkSUlIKdvApXvkJydIbvQ'; // <-- вставьте ID канала (UC...)
   const MAX_RESULTS = 6;
   const POLL_INTERVAL_MS = 5 * 60 * 1000;
