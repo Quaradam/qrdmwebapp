@@ -7,7 +7,9 @@ self.addEventListener('install', (event) => {
         '/style.css',
         '/script.js',
         '/greenroom.ogg', // или .ogg, если используешь
-        '/favicon.ico'
+        '/favicon.ico',
+        '/tg.svg',
+        '/mainfest.json'
       ]);
     })
   );

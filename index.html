@@ -10,41 +10,122 @@
   <link rel="icon" sizes="256x256" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* контейнер страницы */
+    .main { max-width: 1200px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
+
+    /* строка с плеером и превью */
+    .player-row { display: flex; gap: 20px; align-items: flex-start; justify-content: center; }
+
+    /* основной плеер: больше на десктопе, ограничение по высоте */
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      max-width: 1100px;   /* увеличено для десктопа */
+      min-width: 360px;
+      max-height: 70vh;    /* максимум высоты экрана */
+      background: #000;
+      flex: 0 1 68%;       /* занимает ~68% строки */
+      box-sizing: border-box;
+    }
+    .video-container iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* превьюшки справа */
+    .video-thumbs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 0 0 40%;       /* занимает ~30% строки */
+      max-width: 360px;
+      overflow: auto;
+    }
+
+    .video-thumb { cursor: pointer; display: flex; gap: 8px; align-items: center; padding: 6px; border-radius: 6px; }
+    .video-thumb img { width: 140px; height: 78px; object-fit: cover; border-radius: 4px; }
+    .video-thumb .title { font-size: 13px; color: #222; line-height: 1.2; }
+
+    /* адаптация для средних экранов */
+    @media (max-width: 1100px) {
+      .video-container { max-width: 900px; flex: 1 1 65%; }
+      .video-thumbs { flex: 0 0 32%; max-width: 320px; }
+    }
+
+    /* мобильная адаптация: превью под видео в строку, плеер не слишком большой */
+    @media (max-width: 900px) {
+      .player-row { flex-direction: column; align-items: center; gap: 12px; }
+      .video-container {
+        max-width: 95vw;
+        min-width: 220px;
+        max-height: 50vh; /* уменьшаем высоту на телефоне */
+        flex: none;
+      }
+      .video-thumbs {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 100%;
+        max-width: none;
+        padding: 8px 0;
+        gap: 10px;
+      }
+      .video-thumb { flex: 0 0 200px; flex-direction: column; align-items: flex-start; }
+      .video-thumb img { width: 100%; height: auto; aspect-ratio: 16/9; }
+    }
+
+    /* вспомогательное центрирование */
+    .center-row { display:flex; justify-content:center; }
+  </style>
 </head>
 <body>
   <audio id="bg-music" src="greenroom.ogg" loop></audio>
 
-<div id="music-toggle" onclick="toggleMusic()" title="Музыка">
-  <i class="fas fa-music"></i>
-</div>
-<div id="music-now-playing">Сейчас играет: Green Room by Toby Fox</div>
+  <div id="music-toggle" onclick="toggleMusic()" title="Музыка">
+    <i class="fas fa-music"></i>
+  </div>
+  <div id="music-now-playing" style="display:none;">Сейчас играет: Green Room by Toby Fox</div>
 
   <div id="preloader">
     <div class="loader"></div>
   </div>
 
   <div class="main">
-    QRDM
-    <div class="about-button">
+    <div class="about-button center-row" style="margin-bottom:12px;">
       <button onclick="openModal()">Обо мне</button>
+    </div>
+
+    <!-- Явно добавляем строку плеера, чтобы размеры контролировались CSS -->
+    <div class="player-row">
+      <div id="main-video-container" class="video-container" aria-label="Основное видео">
+        <!-- iframe вставляется script.js -->
+      </div>
+
+      <div id="video-thumbs" class="video-thumbs" aria-label="Превью видео">
+        <!-- превью вставляются script.js -->
+      </div>
     </div>
   </div>
 
-  <div class="footer">
-    <a href="https://t.me/qrdmyt" target="_blank"> <img src="tg.svg" alt="Telegram" style="height: 20px; vertical-align: middle; margin-right: 6px;">
-</i> Telegram</a>
+  <div class="footer center-row" style="margin-top:18px; gap:12px;">
+    <a href="https://t.me/qrdmyt" target="_blank"><img src="tg.svg" alt="Telegram" style="height:20px; vertical-align:middle; margin-right:6px;">Telegram</a>
     <a href="https://tiktok.com/@thatoneqrdm" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
     <a href="https://x.com/quaradam1" target="_blank"><i class="fab fa-x-twitter"></i> X</a>
     <a href="https://youtube.com/@quaradam" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
   </div>
 
   <!-- Модальное окно -->
-  <div class="modal" id="aboutModal">
+  <div class="modal" id="aboutModal" style="display:none;">
     <div class="modal-content">
       <h2>Обо мне</h2>
-      <p>Привет! Меня зовут Андрей, я люблю делвть видео, интересуюсь программированием и играми.</p>
+      <p>Привет! Меня зовут Андрей, я люблю делать видео, интересуюсь программированием и играми.</p>
       <button class="close-btn" onclick="closeModal()">Закрыть</button>
     </div>
   </div>
